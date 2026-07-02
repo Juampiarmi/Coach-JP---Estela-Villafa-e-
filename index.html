@@ -47,10 +47,6 @@
 
   :focus-visible { outline: 2px solid var(--fire-glow); outline-offset: 2px; border-radius: 4px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  }
-
   nav {
     position: sticky;
     top: 0;
@@ -331,15 +327,14 @@
 <div class="filters-wrap">
   <div class="filters-inner">
     <span class="filter-label">Día de rutina</span>
-    <div class="filter-group" id="filter-level">
-      </div>
+    <div class="filter-group" id="filter-level"></div>
   </div>
 </div>
 
 <div class="grid-wrap">
   <p class="grid-meta" id="grid-meta"></p>
   <div class="grid" id="grid">
-    <p class="skeleton-note">Cargando tu progreso guardado…</p>
+    <p class="skeleton-note">Cargando tu progreso estructural…</p>
   </div>
 </div>
 
@@ -380,7 +375,7 @@ const workouts = [
     id: "dia-1",
     title: "DÍA 1 – Estabilidad de Pecho, Core & Acondicionamiento de Bajo Impacto",
     subtitle: "Vectores Horizontales Puros & Control Hemodinámico",
-    discipline: "Fuerza-Salud",
+    discipline: "Fuerza-Salul",
     level: "Día 1",
     levelSlug: "Dia_1",
     desc: "Trabajo estabilizador de tren superior en plano seguro y desarrollo de la fuerza del core sin compromiso axial.",
@@ -508,61 +503,58 @@ const workouts = [
   }
 ];
 
-// ---- State ----
+// ---- Estado Interno de Datos ----
 let completedWorkouts = [];
 let currentWeek = 1;
 let lastFocusedElement = null;
+
 const STORAGE_KEY_COMPLETED = 'jp_completed_workouts_estela';
 const STORAGE_KEY_WEEK = 'jp_current_week_estela';
 
-// ---- Storage helpers ----
-async function loadState() {
+// ---- Módulo de Almacenamiento Local (Local Novedoso LocalStorage Puro) ----
+function loadState() {
   try {
-    const completedRes = await window.storage.get(STORAGE_KEY_COMPLETED, false);
-    completedWorkouts = completedRes ? JSON.parse(completedRes.value) : [];
+    const completedRes = localStorage.getItem(STORAGE_KEY_COMPLETED);
+    completedWorkouts = completedRes ? JSON.parse(completedRes) : [];
   } catch (e) {
     completedWorkouts = [];
   }
   try {
-    const weekRes = await window.storage.get(STORAGE_KEY_WEEK, false);
-    currentWeek = weekRes ? parseInt(weekRes.value, 10) : 1;
+    const weekRes = localStorage.getItem(STORAGE_KEY_WEEK);
+    currentWeek = weekRes ? parseInt(weekRes, 10) : 1;
     if (!currentWeek || currentWeek < 1 || currentWeek > 4) currentWeek = 1;
   } catch (e) {
     currentWeek = 1;
   }
 }
 
-async function saveCompleted() {
+function saveCompleted() {
   try {
-    await window.storage.set(STORAGE_KEY_COMPLETED, JSON.stringify(completedWorkouts), false);
+    localStorage.setItem(STORAGE_KEY_COMPLETED, JSON.stringify(completedWorkouts));
   } catch (e) {
-    console.error('No se pudo guardar el progreso', e);
+    console.error('No se pudo guardar localmente', e);
   }
 }
 
-async function saveWeek() {
+function saveWeek() {
   try {
-    await window.storage.set(STORAGE_KEY_WEEK, String(currentWeek), false);
+    localStorage.setItem(STORAGE_KEY_WEEK, String(currentWeek));
   } catch (e) {
-    console.error('No se pudo guardar la semana actual', e);
+    console.error('No se pudo guardar la semana', e);
   }
 }
 
-// ---- Rendering y Controladores del Filtro ----
+// ---- Controladores Visuales y Filtros ----
 function renderFilters() {
   const filterLevelContainer = document.getElementById('filter-level');
   
-  // Inyección limpia y estricta evitando colisiones
   let filterHTML = '<div class="chip active" data-group="level" data-val="all" role="button" tabindex="0">Todos los días</div>';
-  
-  // Forzar generación ordenada Día 1 al Día 5
   workouts.forEach(w => {
     filterHTML += `<div class="chip" data-group="level" data-val="${w.levelSlug}" role="button" tabindex="0">${w.level}</div>`;
   });
   
   filterLevelContainer.innerHTML = filterHTML;
 
-  // Añadir Listeners nativos de acción
   filterLevelContainer.querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', function() { activateChip(this); });
     chip.addEventListener('keydown', function(e) {
@@ -757,7 +749,7 @@ function openModal(w, triggerEl) {
     btnComplete.classList.remove('done');
   }
 
-  btnComplete.onclick = async (e) => {
+  btnComplete.onclick = function(e) {
     e.stopPropagation();
     if (completedWorkouts.includes(w.id)) {
       completedWorkouts = completedWorkouts.filter(id => id !== w.id);
@@ -768,7 +760,7 @@ function openModal(w, triggerEl) {
       btnComplete.textContent = "Sesión completada ✓";
       btnComplete.classList.add('done');
     }
-    await saveCompleted();
+    saveCompleted();
     filterGrid();
   };
 
@@ -811,28 +803,24 @@ document.getElementById('overlay').addEventListener('click', function(e) {
 });
 
 document.querySelectorAll('.week-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
+  btn.addEventListener('click', function() {
     currentWeek = parseInt(btn.getAttribute('data-week'), 10);
     updateWeekUI();
     updateStats();
-    await saveWeek();
+    saveWeek();
   });
 });
 
-document.getElementById('reset-progress').addEventListener('click', async () => {
+document.getElementById('reset-progress').addEventListener('click', function() {
   if (!confirm('¿Reiniciar el progreso de las rutinas marcadas como completadas?')) return;
   completedWorkouts = [];
-  await saveCompleted();
+  saveCompleted();
   filterGrid();
 });
 
-async function init() {
-  window.storage = window.storage || {
-    get: async (key) => { return { value: localStorage.getItem(key) }; },
-    set: async (key, val) => { localStorage.setItem(key, val); }
-  };
-
-  await loadState();
+// Inicialización Síncrona Segura Nativa
+function init() {
+  loadState();
   renderFilters();
   updateWeekUI();
   filterGrid();
