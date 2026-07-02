@@ -375,7 +375,7 @@ const workouts = [
     id: "dia-1",
     title: "DÍA 1 – Estabilidad de Pecho, Core & Acondicionamiento de Bajo Impacto",
     subtitle: "Vectores Horizontales Puros & Control Hemodinámico",
-    discipline: "Fuerza-Salul",
+    discipline: "Fuerza-Salud",
     level: "Día 1",
     levelSlug: "Dia_1",
     desc: "Trabajo estabilizador de tren superior en plano seguro y desarrollo de la fuerza del core sin compromiso axial.",
@@ -493,7 +493,7 @@ const workouts = [
     ],
     metcon: [
       { name: "Bloque Propioceptivo de Flexores de Tobillo & Marcha Mixta", sub: "Estímulo fundamental para la prevención de tropezones y caídas.<br>• 15 Elevaciones de Gemelos Sentada en Máquina.<br>• 30 metros de Marcha en Rack Mixto (Una mancuerna en el hombro y otra colgada abajo). Atenta a la estabilidad.", reps: "4 series de trabajo", detail: "<b>Marcha:</b> Estable y lenta<br>Pausa: 60s" },
-      { name: "Cardio Regenerativo de Cierre (Zona 2)", sub: "Trabajo aeróbico continuo y estable en máquina a elección (Elíptica, Cinta o Bici) para remoción de metabolitos.", reps: "10 minutos", detail: "<b>Intensidad:</b> Zona 2 (RPE 5)" }
+      { name: "Cardio Regenerativo de Cierre (Zona 2)", sub: "Trabajo aeróbico continuo y stable en máquina a elección (Elíptica, Cinta o Bici) para remoción de metabolitos.", reps: "10 minutos", detail: "<b>Intensidad:</b> Zona 2 (RPE 5)" }
     ],
     technicalAnalysis: {
       objectives: "Maximizar la fuerza de agarre y brazos como predictores directos de longevidad, sumando patrones de marcha que estimulen los estabilizadores pélvicos antivuelco.",
@@ -511,7 +511,7 @@ let lastFocusedElement = null;
 const STORAGE_KEY_COMPLETED = 'jp_completed_workouts_estela';
 const STORAGE_KEY_WEEK = 'jp_current_week_estela';
 
-// ---- Módulo de Almacenamiento Local (Local Novedoso LocalStorage Puro) ----
+// ---- Módulo de Almacenamiento Local (LocalStorage Puro) ----
 function loadState() {
   try {
     const completedRes = localStorage.getItem(STORAGE_KEY_COMPLETED);
@@ -818,7 +818,6 @@ document.getElementById('reset-progress').addEventListener('click', function() {
   filterGrid();
 });
 
-// Inicialización Síncrona Segura Nativa
 function init() {
   loadState();
   renderFilters();
