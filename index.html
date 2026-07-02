@@ -131,7 +131,6 @@
 
   .filters-wrap { background: var(--bg-filter); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 2rem; position: sticky; top: 75px; z-index: 90; overflow-x: auto; }
   .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; min-width: max-content; }
-  .filter-group { display: flex; align-items: center; gap: 0.5rem; }
   .filter-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
   .chip { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; user-select: none; }
   .chip:hover { border-color: rgba(255,61,0,0.3); color: var(--text-primary); background: rgba(255,61,0,0.04); }
@@ -317,7 +316,7 @@
       <li data-week="4"><span class="week-num">4</span><span><strong>Semana 4:</strong> Descarga regenerativa tensional. Mitigación de la fatiga acumulada del sistema nervioso central y mantenimiento cinemático puro (RPE 5).</span></li>
     </ul>
     <div class="mesociclo-warning" id="student-warning-box">
-      <strong>⚠️ Protocolo de seguridad seguridad biomecánica:</strong> <span id="student-injury-text">Ninguno reportado.</span>
+      <strong>⚠️ Protocolo de seguridad biomecánica:</strong> <span id="student-injury-text">Ninguno reportado.</span>
     </div>
     <div class="week-selector" role="group" aria-label="Seleccionar semana del mesociclo">
       <span class="week-selector-label">Semana actual:</span>
@@ -333,8 +332,7 @@
   <div class="filters-inner">
     <span class="filter-label">Día de rutina</span>
     <div class="filter-group" id="filter-level">
-      <div class="chip active" data-group="level" data-val="all">Todos los días</div>
-    </div>
+      </div>
   </div>
 </div>
 
@@ -550,25 +548,21 @@ async function saveWeek() {
   }
 }
 
-// ---- Rendering ----
+// ---- Rendering y Controladores del Filtro ----
 function renderFilters() {
-  const levels = [...new Set(workouts.map(w => w.level))];
   const filterLevelContainer = document.getElementById('filter-level');
-  filterLevelContainer.innerHTML = '<div class="chip active" data-group="level" data-val="all" role="button" tabindex="0">Todos los días</div>';
-
-  levels.forEach(lvl => {
-    const matchingWorkout = workouts.find(w => w.level === lvl);
-    const slug = matchingWorkout ? matchingWorkout.levelSlug : lvl.replace(/\s+/g, '_');
-    const chip = document.createElement('div');
-    chip.className = 'chip';
-    chip.setAttribute('data-group', 'level');
-    chip.setAttribute('data-val', slug);
-    chip.setAttribute('role', 'button');
-    chip.setAttribute('tabindex', '0');
-    chip.textContent = lvl;
-    filterLevelContainer.appendChild(chip);
+  
+  // Inyección limpia y estricta evitando colisiones
+  let filterHTML = '<div class="chip active" data-group="level" data-val="all" role="button" tabindex="0">Todos los días</div>';
+  
+  // Forzar generación ordenada Día 1 al Día 5
+  workouts.forEach(w => {
+    filterHTML += `<div class="chip" data-group="level" data-val="${w.levelSlug}" role="button" tabindex="0">${w.level}</div>`;
   });
+  
+  filterLevelContainer.innerHTML = filterHTML;
 
+  // Añadir Listeners nativos de acción
   filterLevelContainer.querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', function() { activateChip(this); });
     chip.addEventListener('keydown', function(e) {
@@ -585,10 +579,12 @@ function activateChip(chip) {
 }
 
 function filterGrid() {
-  const levelVal = document.querySelector('.chip[data-group="level"].active').getAttribute('data-val');
+  const activeChip = document.querySelector('.chip[data-group="level"].active');
+  const levelVal = activeChip ? activeChip.getAttribute('data-val') : 'all';
+  
   let filtered = workouts;
   if (levelVal !== 'all') {
-    filtered = filtered.filter(w => w.levelSlug === levelVal);
+    filtered = workouts.filter(w => w.levelSlug === levelVal);
   }
   renderGrid(filtered);
 }
