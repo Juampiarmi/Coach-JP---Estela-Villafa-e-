@@ -127,6 +127,7 @@
 
   .filters-wrap { background: var(--bg-filter); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 2rem; position: sticky; top: 75px; z-index: 90; overflow-x: auto; }
   .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; min-width: max-content; }
+  .filter-group { display: flex; align-items: center; gap: 0.5rem; }
   .filter-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
   .chip { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; user-select: none; }
   .chip:hover { border-color: rgba(255,61,0,0.3); color: var(--text-primary); background: rgba(255,61,0,0.04); }
@@ -234,16 +235,25 @@
   .block-title.main { color: var(--fire-glow); }
   .block-title.metcon { color: var(--teal-light); }
   .block-content { padding: 0.5rem 1.25rem; }
-  .exercise-row { display: flex; gap: 16px; padding: 1.25rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: flex-start; justify-content: space-between; }
-  .exercise-row:last-child { border-bottom: none; }
-  .exercise-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-muted); min-width: 20px; }
-  .exercise-title-container { display: flex; align-items: flex-start; gap: 12px; flex: 1; max-width: 70%; }
-  .exercise-name { font-weight: 600; font-size: 1rem; color: var(--text-primary); }
-  .exercise-name sub { display: block; font-size: 13px; color: var(--text-secondary); font-style: normal; margin-top: 6px; line-height: 1.5; font-family: 'Inter', sans-serif; }
-  .exercise-name sub b { color: var(--text-primary); }
 
-  .exercise-detail { font-size: 13px; color: var(--text-secondary); text-align: right; max-width: 30%; line-height: 1.4; }
-  .exercise-detail b { display: block; color: var(--text-primary); font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  /* ESTILOS DE LECTURA OPTIMIZADOS PARA LOS EJERCICIOS */
+  .exercise-row { display: flex; gap: 16px; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: flex-start; justify-content: space-between; }
+  .exercise-row:last-child { border-bottom: none; }
+  .exercise-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--fire-glow); min-width: 24px; background: rgba(255,61,0,0.06); height: 28px; width: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .exercise-title-container { display: flex; align-items: flex-start; gap: 12px; flex: 1; max-width: 70%; }
+  
+  .exercise-name { font-weight: 700; font-size: 1.15rem; color: var(--text-primary); letter-spacing: 0.01em; }
+  .exercise-name sub { display: block; font-size: 14px; color: var(--text-secondary); font-style: normal; margin-top: 8px; line-height: 1.6; font-family: 'Inter', sans-serif; }
+  .exercise-name sub b { color: var(--text-primary); font-weight: 600; }
+  
+  /* Contenedores semánticos resaltados dentro de sub */
+  .sub-section { display: block; margin-top: 6px; padding-left: 4px; }
+  .sub-title-tag { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; margin-right: 4px; }
+  .sub-title-tag.coaching { color: var(--gold); }
+  .sub-title-tag.medical { color: #FF5252; background: rgba(255,82,82,0.08); padding: 1px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+
+  .exercise-detail { font-size: 13.5px; color: var(--text-secondary); text-align: right; max-width: 30%; line-height: 1.5; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); min-width: 130px; }
+  .exercise-detail b { display: block; color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; text-align: center; }
 
   .modal-footer { padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.75rem; background: #121214; flex-shrink: 0; }
   .btn-complete { flex: 1; background: var(--fire); color: white; border: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 12px 24px; border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s ease; }
@@ -267,9 +277,10 @@
     .filters-wrap { padding: 0.75rem 1rem; top: 70px; }
     .grid-wrap { padding: 1.5rem 1rem 3rem; }
     .grid { grid-template-columns: 1fr; gap: 1rem; }
-    .exercise-row { flex-direction: column; gap: 12px; }
+    .exercise-row { flex-direction: column; gap: 14px; padding: 1.5rem 0; }
     .exercise-title-container { max-width: 100%; min-width: 100%; }
-    .exercise-detail { text-align: left; max-width: 100%; min-width: 100%; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 10px; }
+    .exercise-detail { text-align: left; max-width: 100%; min-width: 100%; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 12px; }
+    .exercise-detail b { text-align: left; padding-bottom: 6px; }
     .modal-footer { flex-direction: column; }
     .btn-close-modal { order: 2; }
     .progress-wrap { max-width: 100%; }
@@ -309,7 +320,7 @@
       <li data-week="1"><span class="week-num">1</span><span><strong>Semana 1:</strong> Establecimiento de cargas base (RPE 5). Control estricto de la exhalación en la fase concéntrica y asimilación técnica en el plano escapular.</span></li>
       <li data-week="2"><span class="week-num">2</span><span><strong>Semana 2:</strong> Progresión del volumen efectivo e incrementos ligeros de peso (RPE 6). Enfoque en el plano propioceptivo en descarga y estabilidad unipodal.</span></li>
       <li data-week="3"><span class="week-num">3</span><span><strong>Semana 3:</strong> Pico de sobrecarga tensional segura (RPE 7 / RIR 3). Máxima tensión excéntrica controlada en poleas y entornos estables.</span></li>
-      <li data-week="4"><span class="week-num">4</span><span><strong>Semana 4:</strong> Descarga regenerativa tensional. Mitigación de la fatiga acumulada del sistema nervioso central y mantenimiento cinemático puro (RPE 5).</span></li>
+      <li data-week="4"><span class="week-num">4</span><span><strong>Semana 4:</strong> Descarga regenerativa tensional. Mitigación de la fatiga acumulada del sistema nervioso central og mantenimiento cinemático puro (RPE 5).</span></li>
     </ul>
     <div class="mesociclo-warning" id="student-warning-box">
       <strong>⚠️ Protocolo de seguridad biomecánica:</strong> <span id="student-injury-text">Ninguno reportado.</span>
@@ -380,18 +391,18 @@ const workouts = [
     levelSlug: "Dia_1",
     desc: "Trabajo estabilizador de tren superior en plano seguro y desarrollo de la fuerza del core sin compromiso axial.",
     warmup: [
-      { name: "Halos con Disco", sub: "Movilización controlada de la cintura escapular a la altura del pecho. Evitar llevar el disco por encima de los ojos para proteger el hombro.", reps: "3 series x 7/7 rep", detail: "<b>Carga:</b> Muy liviana" },
-      { name: "Press Frontal con Disco", sub: "Empuje puramente horizontal. Extender al frente y regresar sintiendo el trabajo neuromuscular del pectoral y deltoides anterior.", reps: "3 series x 10 rep", detail: "<b>Carga:</b> Liviana" },
-      { name: "Plancha Abdominal Estática", sub: "Activación profunda del transverso abdominal. Mantener alineación perfecta. Exhalar de forma continua.", reps: "3 series x 10 segundos", detail: "<b>Descanso:</b> 30s" }
+      { name: "Halos con Disco", sub: "Movilización controlada de la cintura escapular a la altura del pecho.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Evitar llevar el disco por encima de la línea de los ojos para resguardar la articulación del hombro.</span>", reps: "3 series x 7/7 rep", detail: "<b>Carga:</b><br>Muy liviana" },
+      { name: "Press Frontal con Disco", sub: "Empuje puramente horizontal con tensión constante.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Extender al frente de manera lineal y regresar sintiendo el trabajo neuromuscular del pectoral y deltoides anterior.</span>", reps: "3 series x 10 rep", detail: "<b>Carga:</b><br>Liviana" },
+      { name: "Plancha Abdominal Estática", sub: "Activación isométrica profunda del transverso abdominal resguardando la zona lumbar.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Mantener alineación escapular y pélvica perfecta.</span><br><span class='sub-section'><span class='sub-title-tag medical'>❤️ CONTROL MÉDICO:</span>Exhalar de forma continua, evitando cortar el aire o tensionar el cuello.</span>", reps: "3 series x 10 segundos", detail: "<b>Pausa:</b><br>30s" }
     ],
     main: [
-      { name: "Press de Pecho en Máquina Sentada (Variante Piramidal)", sub: "Vector horizontal puro. Apoyar completamente la espalda.<br>• <b>Set 1:</b> 21 repeticiones (Carga Liviana) + 20s plancha abdominal.<br>• <b>Set 2:</b> 15 repeticiones (Carga Intermedia) + 20s plancha abdominal.<br>• <b>Set 3:</b> 9 repeticiones (Carga Semipesada) + 20s plancha abdominal.", reps: "3 sets completos", detail: "<b>RPE:</b> 5-7<br>Descanso: 2 min" },
-      { name: "Superset: Aperturas Planas con Banda & Extensión de Tríceps", sub: "<b>1. Aperturas Horizontales con Banda Elástica:</b> codos semiflexionados, plano escapular puro.<br><b>2. Extensión de Tríceps con Cuerda en Polea:</b> codos pegados a las costillas, aislando el movimiento.", reps: "21-15-9 repeticiones", detail: "<b>Evolución:</b> Liv-Int-Semi<br>Pausa: 90s" },
-      { name: "Press de Pecho Isométrico con Disco en Banco Plano (Toma Aplauso)", sub: "Sostener un disco liviano comprimiéndolo fuertemente con las palmas de las manos a la altura del esternón, realizando extensiones horizontales controladas descendiendo desde 10 repeticiones hasta 1 de forma estricta.", reps: "1 serie global (10 a 1)", detail: "<b>Ritmo:</b> Lento<br>No hacer Valsalva" }
+      { name: "Press de Pecho en Máquina Sentada (Variante Piramidal)", sub: "Vector horizontal puro de empuje estable. Apoyar completamente la espalda contra el respaldo.<br><br>• <b>Set 1:</b> 21 repeticiones (Carga Liviana) + 20s plancha abdominal.<br>• <b>Set 2:</b> 15 repeticiones (Carga Intermedia) + 20s plancha abdominal.<br>• <b>Set 3:</b> 9 repeticiones (Carga Semipesada) + 20s plancha abdominal.", reps: "3 sets completos", detail: "<b>Intensidad:</b><br>RPE 5-7<br>Descanso: 2 min" },
+      { name: "Superset: Aperturas Planas con Banda & Extensión de Tríceps", sub: "Bloque superior oclusivo de aislamiento.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 1. APERTURAS HORIZONTALES CON BANDA:</span>Mantener codos semiflexionados fijos trabajando estrictamente en plano escapular puro (30° al frente).</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 2. EXTENSIÓN DE TRÍCEPS EN POLEA CON CUERDA:</span>Codos pegados a las costillas, aislando la extensión del codo sin balanceos.</span>", reps: "21-15-9 repeticiones", detail: "<b>Evolución:</b><br>Liv - Int - Semi<br>Pausa: 90s" },
+      { name: "Press de Pecho Isométrico con Disco en Banco Plano (Toma Aplauso)", sub: "Sostener un disco liviano comprimiéndolo fuertemente con las palmas de las manos a la altura del esternón.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Realizar extensiones horizontales controladas descendiendo desde 10 repeticiones hasta 1 de forma estricta. Ritmo lento.</span><br><span class='sub-section'><span class='sub-title-tag medical'>❤️ CONTROL MÉDICO:</span>No hacer Valsalva; coordinar una exhalación larga en cada extensión.</span>", reps: "1 serie global (10 a 1)", detail: "<b>Cadencia:</b><br>Lenta" }
     ],
     metcon: [
-      { name: "Acondicionamiento Cardiovascular Escalonado", sub: "Estímulo aeróbico sin impacto articular. Subir la resistencia o pendiente de forma milimétrica en cada intervalo.<br>• <b>Intervalo 1 al 5:</b> 1 minuto en Bicicleta Fija + 1 minuto en Caminata en Cinta.", reps: "5-4-3-2-1 minutos", detail: "<b>Intensidad:</b> Progresiva<br>RPE: 5-6" },
-      { name: "Corework Analítico Seguros: Crunches Cortos", sub: "Flexión torácica mínima despegando solo escápulas. Mantener la zona lumbar completamente plana y relajada sobre el suelo.", reps: "50-35-15 repeticiones", detail: "<b>Descanso:</b> Controlado" }
+      { name: "Acondicionamiento Cardiovascular Escalonado", sub: "Estímulo aeróbico sin impacto articular. Subir la resistencia o pendiente de forma milimétrica en cada intervalo para cuidar las articulaciones inferiores.<br><br>• <b>Intervalo 1 al 5:</b> 1 minuto en Bicicleta Fija + 1 minuto en Caminata en Cinta.", reps: "5-4-3-2-1 minutos", detail: "<b>Intensidad:</b><br>Progresiva<br>RPE: 5-6" },
+      { name: "Corework Analítico Seguro: Crunches Cortos", sub: "Flexión torácica mínima despegando solo escápulas del suelo.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Mantener la mirada hacia el techo para evitar flexión cervical excesiva.</span><br><span class='sub-section'><span class='sub-title-tag medical'>❤️ CONTROL MÉDICO:</span>Mantener la zona lumbar completamente plana, relajada y compacta sobre la colchoneta.</span>", reps: "50-35-15 repeticiones", detail: "<b>Descanso:</b><br>Controlado" }
     ],
     technicalAnalysis: {
       objectives: "Desarrollar la fuerza tensional del pectoral y tríceps mediante vectores horizontales estables, estimulando el sistema cardiovascular sin impacto y aislando la musculatura abdominal.",
@@ -408,16 +419,16 @@ const workouts = [
     levelSlug: "Dia_2",
     desc: "Fortalecimiento de cuádriceps y glúteos utilizando topes mecánicos altos para mitigar los rangos profundos lesivos.",
     warmup: [
-      { name: "Cardio Base de Activación Sin Sinovial", sub: "Caminata suave en cinta o pedaleo libre en bicicleta estática para aumentar la temperatura local.", reps: "5 minutos", detail: "<b>Intensidad:</b> Muy suave" }
+      { name: "Cardio Base de Activación Sin Sinovial", sub: "Caminata suave en cinta o pedaleo libre en bicicleta estática básica.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>El objetivo es únicamente aumentar la temperatura local y lubricación articular.</span>", reps: "5 minutos", detail: "<b>Intensidad:</b><br>Muy suave" }
     ],
     main: [
-      { name: "AMRAP de Volumen Estructurado (Control de Rango)", sub: "Ejecutar la secuencia ascendente (3-6-9-12-15…) de manera fluida y autorregulada.<br>• <b>Goblet Squat desde Banco Alto:</b> sentarse por completo en un cajón o banco a 90° o superior y pararse. Sin rebotes.<br>• <b>Cable Pull Through:</b> extensión de cadera en polea baja, vector horizontal puro sin compresión axial.", reps: "AMRAP 10 minutos", detail: "<b>RPE:</b> 5-6<br>Carga controlada" },
-      { name: "Superset de Aislamiento de Cuádriceps & Isometría Descargada", sub: "<b>1. Extensión de Cuádriceps en Sillón:</b> bloquear 1s arriba de manera estricta (15-12-9 de liviano a intermedio).<br><b>2. Wall Sit Alto (Apoyo en Pared):</b> apoyo lumbosacro firme en pared con flexión de rodillas a 60° (rango amigable).", reps: "3 sets completos", detail: "<b>Wall Sit:</b> 20-30s<br>Descanso: 2 min" },
-      { name: "Hip Thrust en Máquina o Puentes de Glúteo en Suelo", sub: "Máxima activación del glúteo mayor sin compresión en columna ni flexión profunda de cadera. Empujar con los talones.", reps: "4 sets: 18-15-12-9", detail: "<b>Carga:</b> Progresiva<br>Pausa: 2 min" }
+      { name: "AMRAP de Volumen Estructurado (Control de Rango)", sub: "Ejecutar la secuencia ascendente (3-6-9-12-15…) de manera fluida, rítmica y autorregulada.<br><br>• <b>Goblet Squat desde Banco Alto:</b> sentarse por completo en un cajón o banco a 90° o superior y pararse con control. Sin inercias.<br>• <b>Cable Pull Through:</b> extensión de cadera en polea baja, vector horizontal puro libre de compresión axial.", reps: "AMRAP 10 minutos", detail: "<b>Esfuerzo:</b><br>RPE 5-6<br>Carga muy controlada" },
+      { name: "Superset de Aislamiento de Cuádriceps & Isometría Descargada", sub: "Fortalecimiento estructural extensor de rodilla.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 1. EXTENSIÓN DE CUÁDRICEPS EN SILLÓN:</span>Bloquear 1 segundo arriba de manera estricta (15-12-9 de liviano a intermedio) sin tirones.</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 2. WALL SÍTI ALTO (APOYO EN PARED):</span>Apoyo lumbosacro firme y aplanado en la pared con flexión de rodillas a 60° (rango seguro).</span>", reps: "3 sets completos", detail: "<b>Isometría:</b><br>20-30s<br>Descanso: 2 min" },
+      { name: "Hip Thrust en Máquina o Puentes de Glúteo en Suelo", sub: "Máxima activación de la cadena posterior superior sin compresión en columna ni flexión profunda de cadera.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Empujar de forma concentrada con los talones y contraer arriba.</span><br><span class='sub-section'><span class='sub-title-tag medical'>❤️ CONTROL MÉDICO:</span>Mantener la exhalación arriba, evitando bloquear la respiración.</span>", reps: "4 sets: 18-15-12-9", detail: "<b>Carga:</b><br>Progresiva<br>Pausa: 2 min" }
     ],
     metcon: [
-      { name: "EMOM Miocárdico en Bicicleta Fija", sub: "Acondicionamiento aeróbico por intervalos de tiempo controlados.<br>• <b>Minuto Impar:</b> 40 segundos de pedaleo moderado-intenso (RPE 6-7).<br>• <b>Minuto Par:</b> 60 segundos de pedaleo de recuperación suave.", reps: "12 minutos totales", detail: "<b>6 vueltas</b><br>Cero impacto" },
-      { name: "Corework Funcional: Trabajo Abdominal Estable", sub: "<b>1. Crunches Cortos:</b> 30 repeticiones despegando escápulas.<br><b>2. Crunches en Polea Alta:</b> de rodillas o sentada, flexión de columna dorsal muy corta, controlada y lenta.", reps: "3 series completas", detail: "<b>Polea:</b> 10-15 rep<br>Ritmo: 3-0-3" }
+      { name: "EMOM Miocárdico en Bicicleta Fija", sub: "Acondicionamiento aeróbico fraccionado por intervalos de tiempo controlados sin impacto mecánico.<br><br>• <b>Minuto Impar:</b> 40 segundos de pedaleo moderado-intenso (RPE 6-7).<br>• <b>Minuto Par:</b> 60 segundos de pedaleo de recuperación suave.", reps: "12 minutos totales", detail: "<b>Estructura:</b><br>6 vueltas completas" },
+      { name: "Corework Funcional: Trabajo Abdominal Estable", sub: "Bloque final de fijación central profunda.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 1. CRUNCHES CORTOS:</span>30 repeticiones despegando escápulas de la colchoneta de forma lenta.</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 2. CRUNCHES EN POLEA ALTA:</span>De rodillas o sentada, flexión de columna dorsal muy corta, controlada y pausada.</span>", reps: "3 series completas", detail: "<b>Polea:</b> 10-15 rep<br>Ritmo: 3-0-3" }
     ],
     technicalAnalysis: {
       objectives: "Reclutar de forma óptima los extensores de rodilla y cadera para combatir la sarcopenia, usando topes físicos que eviten rangos de flexión profunda dolorosos.",
@@ -434,16 +445,16 @@ const workouts = [
     levelSlug: "Dia_3",
     desc: "Estímulo denso del dorsal ancho y musculatura interescapular mediante vectores puramente horizontales y amigables para el hombro.",
     warmup: [
-      { name: "Remo en Máquina (Cardio)", sub: "Activación fluida. Mantener los codos por debajo de la línea de los hombros en la fase de tracción final.", reps: "5 minutos", detail: "<b>Ritmo:</b> Cómodo" },
-      { name: "EMOM Descendente de Remo T en Barra Apoyada", sub: "Remo horizontal con apoyo en el pecho para anular la fatiga lumbar. Iniciar con 5 repeticiones pesadas dentro del RPE 6 e incrementar una repetición por minuto de forma técnica.", reps: "EMOM 'X' minutos", detail: "<b>RPE Objetivo:</b> 6-7" }
+      { name: "Remo en Máquina (Cardio)", sub: "Activación fluida global preparatoria.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Mantener los codos por debajo de la línea de los hombros de forma estricta en la fase de tracción final.</span>", reps: "5 minutos", detail: "<b>Ritmo:</b><br>Cómodo" },
+      { name: "EMOM Descendente de Remo T en Barra Apoyada", sub: "Remo horizontal con apoyo en el pecho para anular por completo la fatiga en la lumbar.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Iniciar con 5 repeticiones pesadas dentro del RPE 6 e incrementar una repetición por minuto de forma técnica.</span>", reps: "EMOM 'X' minutos", detail: "<b>Esfuerzo:</b><br>RPE Objetivo: 6-7" }
     ],
     main: [
-      { name: "Remo Sentado en Máquina Articulada (Con Rotación)", sub: "Vector horizontal. Iniciar en agarre prono y rotar hacia agarre supino al traccionar, manteniendo los codos pegados a los costados.<br>• Combinar de inmediato con <b>Bíceps Martillo con Mancuerna</b> (agarre neutro).", reps: "21-15-9 repeticiones", detail: "<b>Carga:</b> Liv-Int-Semi<br>Pausa: 90s" },
-      { name: "EMOM Estructural de Sostén & Tracción Horizontal", sub: "<b>Minuto 1:</b> Sostén isométrico en el punto máximo de una Australian Pull-Up modificada (barra alta, inclinación segura).<br><b>Minuto 2:</b> Remo supino con barra liviana en rack, codos pegados al cuerpo de forma estricta.", reps: "8 minutos totales", detail: "<b>Sostén:</b> 20-30s<br>Remo: 10-15 rep" }
+      { name: "Remo Sentado en Máquina Articulada (Con Rotación)", sub: "Vector horizontal puro. Iniciar en agarre prono y rotar hacia agarre supino al traccionar, manteniendo los codos pegados a los costados.<br><br>• Combinar de inmediato con <b>Bíceps Martillo con Mancuerna</b> (agarre neutro constante).", reps: "21-15-9 repeticiones", detail: "<b>Carga:</b><br>Liv - Int - Semi<br>Pausa: 90s" },
+      { name: "EMOM Estructural de Sostén & Tracción Horizontal", sub: "Alternancia de control e isometría escapular superior.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 MINUTO 1:</span>Sostén isométrico en el punto máximo de una Australian Pull-Up modificada (barra alta, inclinación corporal segura).</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 MINUTO 2:</span>Remo supino con barra liviana en rack, codos pegados al cuerpo de forma estricta.</span>", reps: "8 minutos totales", detail: "<b>Sostén:</b> 20-30s<br>Remo: 10-15 rep" }
     ],
     metcon: [
-      { name: "Intervalos de Fuerza Tensional de Pecho (Vector Inclinado)", sub: "Variante amigable para el hombro doliente.<br>• 10 Press de Pecho Inclinado en Banco (Mancuernas en plano escapular, 30° hacia adentro).<br>• Tiempo restante del bloque: AMRAP de Press de Pecho con Disco (Comprimir disco al frente).", reps: "2 min ON / 1 min OFF", detail: "<b>4 a 5 sets</b><br>RPE: 6" },
-      { name: "HIIT Cardiovascular Dual en Assault Bike (Toma Adaptada)", sub: "Cambios de agarre cada minuto para modificar el plano de tracción y evitar sobrecargas articulares en el hombro.<br>• Min 1: Toma Neutra (40s) | Min 2: Toma Prono (40s) | Min 3: Toma Supina (40s) | Min 4: Descanso.", reps: "EMOM 12-16 minutos", detail: "<b>Intensidad:</b> Moderada<br>Exhalar continuo" }
+      { name: "Intervalos de Fuerza Tensional de Pecho (Vector Inclinado)", sub: "Variante de empuje diagonal sumamente amigable para el hombro doliente.<br><br>• 10 Press de Pecho Inclinado en Banco (Mancuernas en plano escapular, 30° hacia adentro).<br>• Tiempo restante del bloque: AMRAP de Press de Pecho con Disco (Comprimir disco al frente).", reps: "2 min ON / 1 min OFF", detail: "<b>Volumen:</b><br>4 a 5 sets<br>RPE: 6" },
+      { name: "HIIT Cardiovascular Dual en Assault Bike (Toma Adaptada)", sub: "Cambios de agarre dirigidos cada minuto para modificar el plano de tracción y evitar sobrecargas articulares en el hombro.<br><br>• <b>Min 1:</b> Toma Neutra (40s) | <b>Min 2:</b> Toma Prono (40s) | <b>Min 3:</b> Toma Supina (40s) | <b>Min 4:</b> Descanso.", reps: "EMOM 12-16 minutos", detail: "<b>Intensidad:</b><br>Moderada<br>Exhalar continuo" }
     ],
     technicalAnalysis: {
       objectives: "Desarrollar la musculatura postural y de tracción horizontal para descargar el complejo subacromial del hombro y mejorar la estabilidad general del tren superior.",
@@ -460,15 +471,15 @@ const workouts = [
     levelSlug: "Dia_4",
     desc: "Trabajo localizado en la parte posterior del muslo y glúteos mediante poleas y soportes mecánicos seguros.",
     warmup: [
-      { name: "Cardio Starter en Máquina de Remo", sub: "Preparación neuromuscular general. Movimientos fluidos sin forzar el rango de flexión al frente.", reps: "5-10 minutos", detail: "<b>Intensidad:</b> Progresiva" },
-      { name: "EMOM Peso Muerto con Barra Hexagonal (Hex Bar)", sub: "Patrón de bisagra optimizado. La Hex Bar reduce la palanca lumbar al situar la carga en el eje del cuerpo. Altura elevada con discos grandes.", reps: "EMOM 'X' minutos", detail: "<b>3 rep fijas/min</b><br>RPE: 6-7" }
+      { name: "Cardio Starter en Máquina de Remo", sub: "Preparación neuromuscular general y lubricación de la espalda alta.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Movimientos fluidos sin forzar el rango de flexión al frente en la cadera.</span>", reps: "5-10 minutos", detail: "<b>Intensidad:</b><br>Progresiva" },
+      { name: "EMOM Peso Muerto con Barra Hexagonal (Hex Bar)", sub: "Patrón de bisagra optimizado. La Hex Bar reduce la palanca lumbar al situar la carga perfectamente alineada con el eje del cuerpo.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Alturas elevadas usando cajones o discos grandes para acortar el rango.</span>", reps: "EMOM 'X' minutos", detail: "<b>Carga moderada:</b><br>3 rep fijas/min<br>RPE: 6-7" }
     ],
     main: [
-      { name: "Superset de Aislamiento Isquiosural & Glúteos con Bolso", sub: "<b>1. Curl Isquiosural Unilateral en Sillón:</b> 15 repeticiones estrictas por pierna controlando la bajada.<br><b>2. Glute Bridge en Suelo con Corebag (10-15 kg):</b> elevar la pelvis apoyando los hombros en colchoneta. Marcar pausa de 1s arriba.", reps: "3 a 4 sets", detail: "<b>Glute Bridge:</b> 20 rep<br>Descanso: 1:30 min" },
-      { name: "Bloque de Tensión Femoral Acostada & Unilateral", sub: "<b>1. Curl Femoral Acostada en Máquina:</b> 21-15-9 repeticiones piramidales.<br><b>2. Glute Bridge Unilateral en Suelo (Descarga):</b> elevar la pelvis con una pierna extendida en el aire de forma controlada.", reps: "3 sets de trabajo", detail: "<b>Unilateral:</b> 15/15 rep<br>Descanso: 90s" }
+      { name: "Superset de Aislamiento Isquiosural & Glúteos con Bolso", sub: "Trabajo localizado de tracción inferior posterior.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 1. CURL ISQUIOSURAL UNILATERAL EN SILLÓN:</span>15 repeticiones estrictas por pierna controlando la fase de bajada lenta.</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 2. GLUTE BRIDGE EN SUELO CON COREBAG:</span>Elevar la pelvis apoyando firmemente los hombros en la colchoneta. Marcar pausa de 1s arriba.</span>", reps: "3 a 4 sets", detail: "<b>Glute Bridge:</b> 20 rep<br>Descanso: 1:30 min" },
+      { name: "Bloque de Tensión Femoral Acostada & Unilateral", sub: "Aislamiento concéntrico e isometría en descarga.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 1. CURL FEMORAL ACOSTADA EN MÁQUINA:</span>21-15-9 repeticiones piramidales controlando el esfuerzo.</span><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 2. GLUTE BRIDGE UNILATERAL EN SUELO (DESCARGA):</span>Elevar la pelvis manteniendo una pierna extendida en el aire de forma lenta.</span>", reps: "3 sets de trabajo", detail: "<b>Unilateral:</b> 15/15 rep<br>Descanso: 90s" }
     ],
     metcon: [
-      { name: "Combinado de Tensión en Polea Baja para Glúteo", sub: "Trabajo sin carga axial vertical.<br>• 15 Cable Pull Through (Extensión de cadera estricta).<br>• 15 Patadas de Glúteo en Polea por pierna (Ejecución lenta y descendente).", reps: "3 sets totales", detail: "<b>Carga:</b> Liviana-Media<br>Pausa: 60-90s" }
+      { name: "Combinado de Tensión en Polea Baja para Glúteo", sub: "Trabajo localizado de gran brazo de palanca sin ninguna carga axial vertical en la espalda.<br><br>• 15 Cable Pull Through (Extensión de cadera estricta con polea).<br>• 15 Patadas de Glúteo en Polea por pierna (Ejecución controlada y pausada).", reps: "3 sets totales", detail: "<b>Intensidad:</b><br>Liviana - Media<br>Pausa: 60-90s" }
     ],
     technicalAnalysis: {
       objectives: "Fortalecer los isquiotibiales y glúteos de forma aislada, aumentando la masa muscular útil para la prevención activa de caídas y la estabilidad lumbopélvica.",
@@ -485,15 +496,15 @@ const workouts = [
     levelSlug: "Dia_5",
     desc: "Enfoque final en la fuerza de prensión manual (agarre), fuerza en brazos y estabilidad propioceptiva mediante caminatas de carga.",
     warmup: [
-      { name: "Cardio Pendiente Inclinada (Caminata en Cinta)", sub: "Activación metabólica segura. Aumento progresivo de la pendiente manteniendo una velocidad moderada y pisada firme.", reps: "10 minutos", detail: "<b>Pendiente:</b> Alza gradual" }
+      { name: "Cardio Pendiente Inclinada (Caminata en Cinta)", sub: "Activación metabólica sistémica segura.<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 COACHING TIP:</span>Aumento progresivo de la pendiente manteniendo una velocidad moderada y pisada firme con talón.</span>", reps: "10 minutos", detail: "<b>Pendiente:</b><br>Alza gradual" }
     ],
     main: [
-      { name: "Bloque de Brazos en Tensión Continua e Hipertrofia Útil", sub: "Desarrollo de fuerza en extremidades superiores para tareas de la vida diaria.<br>• <b>Tríceps en Polea Alta con Barra Plana:</b> codos inmóviles (21-18-15-12-9).<br>• <b>Bíceps de Pie con Barra Plana en Polea Baja:</b> tensión constante en todo el recorrido (21-18-15-12-9).", reps: "5 sets piramidales", detail: "<b>Cargas:</b> Construyendo peso" },
-      { name: "Circuito de Densidad Muscular Interscapular & Marchas de Estabilidad", sub: "Realizar de forma continuada:<br>• 15 Vuelos Posteriores en Máquina Sentada (Pájaros).<br>• 15 Fondos en Máquina Sentada (Pectoral/Tríceps asistido).<br>• 15 Aperturas de Pecho en Máquina Sentada.<br>• 30 metros de Caminata del Granjero Unilateral (Sostener mancuerna de un solo lado para forzar al core lateral).", reps: "3 vueltas completas", detail: "<b>Marcha:</b> 15m por brazo<br>Descanso: 2 min al final" }
+      { name: "Bloque de Brazos en Tensión Continua e Hipertrofia Útil", sub: "Desarrollo de fuerza localizada en extremidades superiores indispensable para tareas cotidianas.<br><br>• <b>Tríceps en Polea Alta con Barra Plana:</b> codos totalmente inmóviles a los lados (21-18-15-12-9).<br>• <b>Bíceps de Pie con Barra en Polea Baja:</b> tensión mecánica constante en todo el rango (21-18-15-12-9).", reps: "5 sets piramidales", detail: "<b>Cargas efectivas:</b><br>Construyendo peso" },
+      { name: "Circuito de Densidad Muscular Interscapular & Marchas de Estabilidad", sub: "Realizar de forma continuada en estaciones fijas:<br><br>• 15 Vuelos Posteriores en Máquina Sentada (Pájaros).<br>• 15 Fondos en Máquina Sentada (Pectoral/Tríceps asistido).<br>• 15 Aperturas de Pecho en Máquina Sentada.<br>• 30 metros de <b>Caminata del Granjero Unilateral</b> (Sostener mancuerna de un solo lado para forzar al core lateral).", reps: "3 vueltas completas", detail: "<b>Marcha de control:</b><br>15m por brazo<br>Descanso: 2 min" }
     ],
     metcon: [
-      { name: "Bloque Propioceptivo de Flexores de Tobillo & Marcha Mixta", sub: "Estímulo fundamental para la prevención de tropezones y caídas.<br>• 15 Elevaciones de Gemelos Sentada en Máquina.<br>• 30 metros de Marcha en Rack Mixto (Una mancuerna en el hombro y otra colgada abajo). Atenta a la estabilidad.", reps: "4 series de trabajo", detail: "<b>Marcha:</b> Estable y lenta<br>Pausa: 60s" },
-      { name: "Cardio Regenerativo de Cierre (Zona 2)", sub: "Trabajo aeróbico continuo y stable en máquina a elección (Elíptica, Cinta o Bici) para remoción de metabolitos.", reps: "10 minutos", detail: "<b>Intensidad:</b> Zona 2 (RPE 5)" }
+      { name: "Bloque Propioceptivo de Flexores de Tobillo & Marcha Mixta", sub: "Estímulo fundamental neuromuscular para la prevención absoluta de tropezones y caídas.<br><br>• 15 Elevaciones de Gemelos Sentada en Máquina (Tensión en sóleos).<br>• 30 metros de Marcha en Rack Mixto (Una mancuerna apoyada en el hombro y otra colgada abajo).", reps: "4 series de trabajo", detail: "<b>Marcha estructural:</b><br>Estable y lenta<br>Pausa: 60s" },
+      { name: "Cardio Regenerativo de Cierre (Zona 2)", sub: "Trabajo aeróbico continuo y estable en máquina a elección (Elíptica o Bici) para remoción de metabolitos y retorno venoso progresivo.", reps: "10 minutos", detail: "<b>Intensidad control:</b><br>Zona 2 (RPE 5)" }
     ],
     technicalAnalysis: {
       objectives: "Maximizar la fuerza de agarre y brazos como predictores directos de longevidad, sumando patrones de marcha que estimulen los estabilizadores pélvicos antivuelco.",
@@ -711,7 +722,7 @@ function openModal(w, triggerEl) {
   if (w.main && w.main.length > 0) {
     html += `
       <div class="block">
-        <div class="block-header"><div class="block-title main">🏋️‍♀️ Bloque A / B / C — Fuerza en Entorno Estable</div></div>
+        <div class="block-header"><div class="block-title main">🏋️‍♂️ Bloque A / B / C — Fuerza en Entorno Estable</div></div>
         <div class="block-content">`;
     w.main.forEach((ex, idx) => { html += getExerciseRow(ex, idx); });
     html += `</div></div>`;
