@@ -457,7 +457,7 @@
 const ATHLETE_CONFIG = {
   name: "Estela Villafañe",
   objective: "Volumen y Variabilidad Adaptada — Entrenamiento Funcional Seguro",
-  levelBadge: "Adaptado",
+  levelBadge: "Recuperación de Movimientos Funcionales",
   specialCare: "Cadera operada (leve renguera al andar): usar siempre variantes de pie o en banco, estables y seguras, evitando flexiones de cadera mayores a 90° (asiento alto en bicicleta, sin sentadillas profundas). Hombros: evitar empujes verticales puros sobre la cabeza y vuelos laterales con mancuernas libres — trabajar en planos inclinados, neutros o con poleas que abran el espacio articular. Sin ejercicios de piso ni de rodillas: las planchas y el trabajo de núcleo se reemplazan por variantes inclinadas apoyadas en banco alto o de pie."
 };
 document.getElementById('student-name-text').textContent = ATHLETE_CONFIG.name;
@@ -487,6 +487,18 @@ const workouts = [
         "reps": "4 series x 10 a 12 rep.",
         "detail": "<b>Tempo 2.0.2.1</b><br>RPE 6 · Descanso 90s",
         "sub": "Al presionar los discos de pie de forma horizontal, activamos pectoral y tríceps sin rango profundo en el hombro y con carga cero sobre la cadera. Apretar los discos entre sí con fuerza durante todo el recorrido. <a class='video-link' href='javascript:void(0)' data-yt='sGu_7v5Otvo'>▶ Ver técnica en video</a>"
+      },
+      {
+        "name": "Bloque 2: Superserie de Empuje Guiado y Core Isométrico",
+        "reps": "3 a 4 vueltas",
+        "detail": "<b>Descanso</b><br>60s post-ronda",
+        "sub": "<span class='sub-block-title'>A1</span> Press de pecho en máquina = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='JXJmPXlqwh0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Plancha abdominal inclinada (antebrazos apoyados en banco alto) = 30 a 45 segundos. <a class='video-link' href='javascript:void(0)' data-yt='xe2MXatLTUw'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>El agarre del press en máquina no debe pasar hacia atrás de la línea del torso, para evitar dolor en el hombro. Plancha en banco alto para evitar tumbarse al suelo.</span>"
+      },
+      {
+        "name": "Bloque 3: Triserie Estética de Brazos & Abdomen",
+        "reps": "3 a 4 vueltas",
+        "detail": "<b>Descanso</b><br>60 segundos",
+        "sub": "<span class='sub-block-title'>B1</span> Press con mancuernas en banco plano = 12 repeticiones (codos a 45°). <a class='video-link' href='javascript:void(0)' data-yt='mTaiQemkEpU'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Cable Triceps Pushdown (Extensión de tríceps en polea alta con barra) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='1FjkhpZsaxc'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada en banco inclinado o silla controlada) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='_HDZODOx7Zw'>▶ Ver técnica en video</a>"
       }
     ],
     "metcon": [
@@ -550,7 +562,7 @@ const workouts = [
     "technicalAnalysis": {
       "objectives": "Acondicionar y dar volumen a la musculatura extensora del tren inferior (cuádriceps) de forma aislada e incrementar la potencia local de las pantorrillas para dar soporte a la marcha.",
       "tips": "En la prensa a 180°, empujar distribuyendo el peso en todo el metatarso; no levantar los talones de la plataforma.",
-      "strategies": "El gran volumen de pantorrillas se agrupa en triserie al final para optimizar la resistance periférica y el retorno venoso sin ninguna demanda o fricción sobre la cadera.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica de la prensa a RPE 6.5 con asiento/respaldo verificado. Triserie de pantorrillas a volumen moderado.<br><b>Semana 2:</b> Incremento marginal de carga en la prensa y en las extensiones unilaterales, siempre sin molestia de cadera.<br><b>Semana 3:</b> Pico de carga controlado en cuádriceps y pantorrillas, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Triserie de pantorrillas a 2 vueltas, RPE general a 5, foco en marcha y equilibrio."
+      "strategies": "El gran volumen de pantorrillas se agrupa en triserie al final para optimizar la resistencia periférica y el retorno venoso sin ninguna demanda o fricción sobre la cadera.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica de la prensa a RPE 6.5 con asiento/respaldo verificado. Triserie de pantorrillas a volumen moderado.<br><b>Semana 2:</b> Incremento marginal de carga en la prensa y en las extensiones unilaterales, siempre sin molestia de cadera.<br><b>Semana 3:</b> Pico de carga controlado en cuádriceps y pantorrillas, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Triserie de pantorrillas a 2 vueltas, RPE general a 5, foco en marcha y equilibrio."
     }
   },
   {
@@ -580,13 +592,13 @@ const workouts = [
         "name": "Bloque 2: Superserie de Tracción Cerrada y Estabilidad",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60s post-ronda",
-        "sub": "<span class='sub-block-title'>A1</span> Close Grip Lat Pulldown (Jalón agarre cerrado neutro) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='jXRxMJhOCc0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Plancha abdominal inclinada (antebrazos apoyados en banco alto) = 30 segundos con bloqueo del transverso."
+        "sub": "<span class='sub-block-title'>A1</span> Close Grip Lat Pulldown (Jalón agarre cerrado neutro) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='jXRxMJhOCc0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Plancha abdominal inclinada (antebrazos apoyados en banco alto) = 30 segundos con bloqueo del transverso. <a class='video-link' href='javascript:void(0)' data-yt='xe2MXatLTUw'>▶ Ver técnica en video</a>"
       },
       {
         "name": "Bloque 3: Triserie Postural y Flexores de Codo",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Pull-over en polea alta con cuerda = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MeczZ6iUYPo'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Dumbbell Bicep Curl (Curl de bíceps con mancuernas de pie) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MKWBV29S6c0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada controlada en banco o silla inclinada) = 12 repeticiones."
+        "sub": "<span class='sub-block-title'>B1</span> Pull-over en polea alta con cuerda = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MeczZ6iUYPo'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Dumbbell Bicep Curl (Curl de bíceps con mancuernas de pie) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MKWBV29S6c0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada controlada en banco o silla inclinada) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='_HDZODOx7Zw'>▶ Ver técnica en video</a>"
       }
     ],
     "metcon": [
@@ -985,6 +997,8 @@ function openVideoPopup(videoId) {
   const wrap = document.getElementById('video-popup-wrap');
   const iframe = document.getElementById('video-popup-iframe');
   const fallbackLink = document.getElementById('video-popup-fallback-link');
+  // youtube-nocookie.com: dominio "modo privado" de YouTube, mucho menos afectado por
+  // adblockers/extensiones de privacidad que suelen bloquear el embed clásico de youtube.com.
   iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
   if (fallbackLink) fallbackLink.href = 'https://www.youtube.com/watch?v=' + videoId;
   wrap.classList.add('open');
@@ -993,7 +1007,7 @@ function closeVideoPopup() {
   const wrap = document.getElementById('video-popup-wrap');
   const iframe = document.getElementById('video-popup-iframe');
   if (!wrap || !wrap.classList.contains('open')) return;
-  iframe.src = '';
+  iframe.src = ''; // corta la reproducción al cerrar
   wrap.classList.remove('open');
 }
 document.getElementById('video-popup-close').addEventListener('click', closeVideoPopup);
