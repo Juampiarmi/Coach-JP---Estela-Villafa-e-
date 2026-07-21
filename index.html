@@ -287,11 +287,25 @@
   .exercise-title-container { display: flex; align-items: flex-start; gap: 12px; flex: 1; max-width: 70%; }
 
   .exercise-name { font-weight: 700; font-size: 1.15rem; color: var(--text-primary); letter-spacing: 0.01em; }
-  .exercise-name sub { display: block; font-size: 14px; color: var(--text-secondary); font-style: normal; margin-top: 8px; line-height: 1.6; font-family: 'Inter', sans-serif; }
-  .exercise-name sub b { color: var(--text-primary); font-weight: 600; }
+  .exercise-explain-wrap { display: block; font-size: 14px; color: var(--text-secondary); font-style: normal; margin-top: 10px; line-height: 1.6; font-family: 'Inter', sans-serif; }
+  .exercise-explain-wrap b { color: var(--text-primary); font-weight: 600; }
+
+  /* Lista ordenada de ejercicios dentro de bloques combinados (superserie/triserie/biserie) */
+  .combo-exercise-list { display: flex; flex-direction: column; gap: 8px; }
+  .combo-exercise-item { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; }
+  .combo-tag { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; color: var(--violet-light); background: rgba(124,77,255,0.12); padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+  .combo-exercise-info { flex: 1; min-width: 160px; display: flex; flex-direction: column; gap: 3px; }
+  .combo-exercise-name { font-weight: 600; font-size: 14px; color: var(--text-primary); line-height: 1.35; }
+  .combo-exercise-reps { font-size: 12.5px; color: var(--gold); font-weight: 600; }
+  .combo-exercise-item .video-link { margin-top: 0; flex-shrink: 0; }
+  .exercise-plain-sub { display: block; }
+
+  /* Explicaciones y tips: separados visualmente debajo de los ejercicios */
+  .explain-box { display: block; margin-top: 12px; padding: 12px 14px; background: rgba(255,214,0,0.04); border: 1px solid rgba(255,214,0,0.15); border-left: 3px solid var(--gold); border-radius: var(--radius-sm); font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; }
+  .explain-box b { color: var(--text-primary); font-weight: 600; }
+  .explain-box + .explain-box { margin-top: 8px; }
 
   /* Contenedores semánticos resaltados dentro de sub */
-  .sub-section { display: block; margin-top: 6px; padding-left: 4px; }
   .sub-block-title { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; color: var(--violet-light); background: rgba(124,77,255,0.1); padding: 1px 7px; border-radius: 4px; display: inline-block; margin-right: 6px; }
   .sub-title-tag { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; margin-right: 4px; }
   .sub-title-tag.coaching { color: var(--gold); }
@@ -390,7 +404,7 @@
   </div>
   <div class="mesociclo-box" id="mesociclo-content">
     <h3>Estrategia general del mesociclo: Volumen y Variabilidad Adaptada</h3>
-    <p>Este bloque se organiza en un <strong>mesociclo de 4 semanas</strong> con progresión de carga conservadora y autorregulada por RPE, respetando en todo momento la cadera operada y los hombros sensibles. Nunca se busca el fallo técnico: el objetivo es volumen sostenido en vectores seguros. Elige la semana actual:</p>
+    <p>Este bloque se organiza en un <strong>mesociclo de 4 semanas</strong> con progresión de carga conservadora y autorregulada por RPE, respetando en todo momento el rango de cadera cuidado y los hombros sensibles. Nunca se busca el fallo técnico: el objetivo es volumen sostenido en vectores seguros. Elige la semana actual:</p>
     <ul id="mesociclo-weeks">
       <li data-week="1"><span class="week-num">1</span><span><strong>Semana 1:</strong> Línea base técnica de todos los bloques, priorizando el patrón de movimiento seguro por sobre la carga. RPE objetivo: 5 - 6.</span></li>
       <li data-week="2"><span class="week-num">2</span><span><strong>Semana 2:</strong> Incremento marginal de carga en los bloques principales, siempre que la técnica y la ausencia de molestia articular se mantengan intactas. RPE objetivo: 6.</span></li>
@@ -458,7 +472,7 @@ const ATHLETE_CONFIG = {
   name: "Estela Villafañe",
   objective: "Volumen y Variabilidad Adaptada — Entrenamiento Funcional Seguro",
   levelBadge: "Recuperación de Movimientos Funcionales",
-  specialCare: "Cadera operada (leve renguera al andar): usar siempre variantes de pie o en banco, estables y seguras, evitando flexiones de cadera mayores a 90° (asiento alto en bicicleta, sin sentadillas profundas). Hombros: evitar empujes verticales puros sobre la cabeza y vuelos laterales con mancuernas libres — trabajar en planos inclinados, neutros o con poleas que abran el espacio articular. Sin ejercicios de piso ni de rodillas: las planchas y el trabajo de núcleo se reemplazan por variantes inclinadas apoyadas en banco alto o de pie."
+  specialCare: "Cadera con rango de flexión cuidado (leve renguera al andar): usar siempre variantes de pie o en banco, estables y seguras, evitando flexiones de cadera mayores a 90° (asiento alto en bicicleta, sin sentadillas profundas). Hombros: evitar empujes verticales puros sobre la cabeza y vuelos laterales libres de pie — trabajar en planos inclinados, neutros o con poleas que abran el espacio articular. Sin ejercicios de piso ni de rodillas: las planchas y el trabajo de núcleo se reemplazan por variantes inclinadas apoyadas en banco alto o de pie."
 };
 document.getElementById('student-name-text').textContent = ATHLETE_CONFIG.name;
 document.getElementById('student-objective-text').textContent = ATHLETE_CONFIG.objective;
@@ -472,47 +486,47 @@ const workouts = [
     "discipline": "Empuje Horizontal Protegido",
     "level": "Día 1",
     "levelSlug": "Dia_1",
-    "desc": "Torso dominante: empuje horizontal en vectores seguros para el hombro, con core isométrico en banco alto sin apoyo en el piso.",
+    "desc": "Torso dominante: doble superserie de empuje horizontal e inclinado protegiendo el hombro, con volumen de brazos, abdomen y rotación de core de pie, sin apoyo en el piso.",
     "warmup": [
       {
         "name": "Cinta de caminar – ritmo plano y suave",
         "reps": "5 minutos",
         "detail": "<b>Objetivo:</b> Cero inclinación",
-        "sub": "Ritmo plano, sin inclinación, para no estresar la flexión de la cadera operada."
+        "sub": "Ritmo plano, sin inclinación, para no estresar la flexión de cadera."
       }
     ],
     "main": [
       {
-        "name": "Bloque 1: Press de pecho con discos de pie (Svend Press)",
-        "reps": "4 series x 10 a 12 rep.",
-        "detail": "<b>Tempo 2.0.2.1</b><br>RPE 6 · Descanso 90s",
-        "sub": "Al presionar los discos de pie de forma horizontal, activamos pectoral y tríceps sin rango profundo en el hombro y con carga cero sobre la cadera. Apretar los discos entre sí con fuerza durante todo el recorrido. <a class='video-link' href='javascript:void(0)' data-yt='sGu_7v5Otvo'>▶ Ver técnica en video</a>"
+        "name": "Bloque 1: Superserie de Fuerza Central de Empuje Horizontal",
+        "reps": "3 a 4 vueltas",
+        "detail": "<b>Descanso</b><br>90s post-ronda",
+        "sub": "<span class='sub-block-title'>A1</span> Press de pecho con discos de pie (Svend Press) = 10 a 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='sGu_7v5Otvo'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Cruces de polea unilateral con rotación de torso (Single-arm Cable Chest Press with Rotation) = 10 repeticiones por lado. <a class='video-link' href='javascript:void(0)' data-yt='JVwQ6Efhm40'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>Al presionar los discos de pie de forma horizontal, activamos pectoral y tríceps sin rango profundo en el hombro y con carga cero sobre la cadera; apretar los discos entre sí con fuerza durante todo el recorrido. El cruce unilateral con rotación suma un componente de anti-rotación de core, de pie, sin exigir flexión de cadera ni apoyo en el piso.</span>"
       },
       {
-        "name": "Bloque 2: Superserie de Empuje Guiado y Core Isométrico",
+        "name": "Bloque 2: Superserie de Empuje Inclinado y Tríceps en Polea",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60s post-ronda",
-        "sub": "<span class='sub-block-title'>A1</span> Press de pecho en máquina = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='JXJmPXlqwh0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Plancha abdominal inclinada (antebrazos apoyados en banco alto) = 30 a 45 segundos. <a class='video-link' href='javascript:void(0)' data-yt='xe2MXatLTUw'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>El agarre del press en máquina no debe pasar hacia atrás de la línea del torso, para evitar dolor en el hombro. Plancha en banco alto para evitar tumbarse al suelo.</span>"
+        "sub": "<span class='sub-block-title'>A1</span> Press de banca inclinado con barra (Incline Bench Press) = 10 a 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='98HWfiRonkE'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Single-arm Cross-body Cable Triceps Extension (Extensión de tríceps cruzada unilateral en polea baja) = 12 repeticiones por lado. <a class='video-link' href='javascript:void(0)' data-yt='HCc3kDzTyTQ'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>En el press inclinado, controlá el descenso de la barra hasta la parte alta del pectoral sin rebotar ni hiperextender los hombros al final del recorrido. En la extensión cruzada de tríceps, trabajá un brazo por vez y ajustá el rango de movimiento a lo que el hombro tolere sin molestia — si en algún punto genera incomodidad, recortá el recorrido o avisá para cambiarlo por otra variante.</span>"
       },
       {
         "name": "Bloque 3: Triserie Estética de Brazos & Abdomen",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Press con mancuernas en banco plano = 12 repeticiones (codos a 45°). <a class='video-link' href='javascript:void(0)' data-yt='mTaiQemkEpU'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Cable Triceps Pushdown (Extensión de tríceps en polea alta con barra) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='1FjkhpZsaxc'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada en banco inclinado o silla controlada) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='_HDZODOx7Zw'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>B1</span> Press con mancuernas en banco plano = 12 repeticiones (codos a 45°). <a class='video-link' href='javascript:void(0)' data-yt='mTaiQemkEpU'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Cable Triceps Pushdown (Extensión de tríceps en polea alta con barra) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='1FjkhpZsaxc'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada en banco inclinado o silla controlada) = 12 a 15 repeticiones."
       }
     ],
     "metcon": [
       {
-        "name": "Bloque 4: Finisher de Extensores de Brazo",
+        "name": "Bloque 4: Finisher de Rotación de Core",
         "reps": "3 series efectivas",
         "detail": "<b>Descanso</b><br>45 segundos",
-        "sub": "<span class='sub-block-title'>C1</span> Extensiones de tríceps en polea alta con soga = 12 a 15 repeticiones fluidas. <a class='video-link' href='javascript:void(0)' data-yt='1FoWlRS2Edc'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>C1</span> Cable Woodchopper (Leñador en polea) = 12 repeticiones por lado, controladas. <a class='video-link' href='javascript:void(0)' data-yt='_yaPTxjJpwg'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>Movimiento diagonal de pie, a la altura del torso — sin ningún alcance por sobre la cabeza. Generá la rotación desde la cadera y el core, con los brazos como transmisores de la fuerza, no como motor del movimiento.</span>"
       }
     ],
     "technicalAnalysis": {
-      "objectives": "Estimular los músculos de empuje del torso (pectoral/tríceps) y la faja abdominal sin activar el dolor del hombro ni generar impacto sobre la cirugía de cadera.",
-      "tips": "En el Svend Press, apretar los discos entre sí con fuerza durante todo el recorrido. En las máquinas de pecho, los codos deben viajar sutilmente hacia abajo (no abiertos en cruz).",
-      "strategies": "La acumulación de volumen se hace en vectores estrictamente horizontales o hacia abajo, eliminando la inflamación del manguito rotador y adaptando la posición para evitar que la alumna deba tumbarse al piso.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica del Svend Press a RPE 6, consolidando el patrón de empuje horizontal sin rango profundo de hombro.<br><b>Semana 2:</b> Incremento marginal de carga en el press de máquina y en el banco plano, siempre sin molestia en el hombro.<br><b>Semana 3:</b> Pico de carga controlado del mesociclo en los tres bloques de empuje, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en técnica y movilidad de hombro."
+      "objectives": "Estimular los músculos de empuje del torso (pectoral/tríceps) y la faja abdominal sin activar el dolor del hombro ni generar impacto sobre la cadera.",
+      "tips": "En el Svend Press, apretar los discos entre sí con fuerza durante todo el recorrido. En los cruces de polea con rotación, la rotación del torso debe nacer de la cadera y el core, no de la zona lumbar. En el press inclinado con barra, controlar el descenso hasta la parte alta del pectoral sin hiperextender los hombros al final del recorrido.",
+      "strategies": "La acumulación de volumen se hace en vectores estrictamente horizontales o hacia abajo, eliminando la inflamación del manguito rotador y adaptando la posición para evitar que la alumna deba tumbarse al piso.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera y los hombros.<br><br><b>Semana 1:</b> Técnica de la superserie de empuje horizontal (Svend Press + cruces con rotación) a RPE 6, consolidando el patrón sin rango profundo de hombro.<br><b>Semana 2:</b> Incremento marginal de carga en el press inclinado y en el banco plano, siempre sin molestia en el hombro.<br><b>Semana 3:</b> Pico de carga controlado del mesociclo en los tres bloques de empuje, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en técnica y movilidad de hombro."
     }
   },
   {
@@ -522,13 +536,13 @@ const workouts = [
     "discipline": "Piernas & Retorno Venoso",
     "level": "Día 2",
     "levelSlug": "Dia_2",
-    "desc": "Piernas dominante: prensa horizontal con soporte lumbar completo, extensión unilateral para asimetrías de marcha y alto volumen de pantorrillas.",
+    "desc": "Piernas dominante: prensa horizontal con soporte lumbar completo, extensión unilateral con activación de glúteo con banda, y triserie de isquiosurales, pantorrillas y estabilidad unilateral de cadera.",
     "warmup": [
       {
         "name": "Bicicleta fija – asiento alto",
         "reps": "5 minutos",
         "detail": "<b>Objetivo:</b> Flexión de cadera ≤ 90°",
-        "sub": "Asiento alto para garantizar que la flexión de la cadera operada nunca supere los 90 grados de ángulo."
+        "sub": "Asiento alto para garantizar que la flexión de cadera nunca supere los 90 grados de ángulo."
       }
     ],
     "main": [
@@ -539,16 +553,16 @@ const workouts = [
         "sub": "El movimiento en 180° es biomecánicamente seguro; el respaldo plano elimina la flexión lumbar forzada en la fase profunda y reduce la presión cardiovascular. Empujar distribuyendo el peso en todo el metatarso; no levantar los talones de la plataforma."
       },
       {
-        "name": "Bloque 2: Superserie de Extensión Unilateral e Isometría de Pie",
+        "name": "Bloque 2: Superserie de Extensión Unilateral y Activación de Glúteo con Banda",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60s post-ronda",
-        "sub": "<span class='sub-block-title'>A1</span> Extensiones de cuádriceps unilaterales con pausa isométrica = 10 repeticiones por pierna (sosteniendo 1 segundo arriba). <a class='video-link' href='javascript:void(0)' data-yt='iCTEuOnr8H8'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Cable Pallof Press (Press Pallof en polea de pie) = 20 segundos estáticos por lado. <a class='video-link' href='javascript:void(0)' data-yt='-0N2xTi69t8'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>A1</span> Extensiones de cuádriceps unilaterales con pausa isométrica = 10 repeticiones por pierna (sosteniendo 1 segundo arriba). <a class='video-link' href='javascript:void(0)' data-yt='iCTEuOnr8H8'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Bodyweight Knee-Banded Glute Bridge (Puente de glúteo con banda en rodillas) = 15 repeticiones, con pausa isométrica arriba. <a class='video-link' href='javascript:void(0)' data-yt='Zr2RLjIjCN0'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>Con la banda alrededor de las rodillas, empujá las rodillas hacia afuera contra la banda durante todo el recorrido para mantener activo el glúteo medio, y apretá bien el glúteo arriba sin hiperextender la zona lumbar.</span>"
       },
       {
-        "name": "Bloque 3: Triserie de Pantorrillas y Circulación Periférica",
+        "name": "Bloque 3: Triserie de Isquiosurales, Pantorrillas y Estabilidad Unilateral",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Elevación de talones de pie en máquina Smith = 15 a 20 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='-IURfiupLoE'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Seated Calf Raises (Elevaciones de talón sentado en máquina) = 20 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='8BkvUI5i3EY'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Dumbbell Tip-Toe Carry (Caminata en puntas de pie) = 45 segundos continuos con mancuernas ligeras. <a class='video-link' href='javascript:void(0)' data-yt='73yout0HFn4'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>B1</span> Hamstring Walkouts (Caminata de isquiosurales) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='YOnrl0Ar6D4'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Seated Calf Raises (Elevaciones de talón sentado en máquina) = 20 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='8BkvUI5i3EY'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Split Squat - Hand Supported (Sentadilla dividida con apoyo de mano) = 10 a 12 repeticiones por pierna, con apoyo de mano para el equilibrio. <a class='video-link' href='javascript:void(0)' data-yt='C3UGTxApK-w'>▶ Ver técnica en video</a><br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>Apoyarse de una mano en un soporte fijo para controlar el descenso y frenar el rango antes de superar los 90° de flexión de cadera en la pierna delantera; el apoyo también ayuda a mantener el torso erguido y evitar compensaciones lumbares.</span>"
       }
     ],
     "metcon": [
@@ -560,9 +574,9 @@ const workouts = [
       }
     ],
     "technicalAnalysis": {
-      "objectives": "Acondicionar y dar volumen a la musculatura extensora del tren inferior (cuádriceps) de forma aislada e incrementar la potencia local de las pantorrillas para dar soporte a la marcha.",
-      "tips": "En la prensa a 180°, empujar distribuyendo el peso en todo el metatarso; no levantar los talones de la plataforma.",
-      "strategies": "El gran volumen de pantorrillas se agrupa en triserie al final para optimizar la resistencia periférica y el retorno venoso sin ninguna demanda o fricción sobre la cadera.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica de la prensa a RPE 6.5 con asiento/respaldo verificado. Triserie de pantorrillas a volumen moderado.<br><b>Semana 2:</b> Incremento marginal de carga en la prensa y en las extensiones unilaterales, siempre sin molestia de cadera.<br><b>Semana 3:</b> Pico de carga controlado en cuádriceps y pantorrillas, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Triserie de pantorrillas a 2 vueltas, RPE general a 5, foco en marcha y equilibrio."
+      "objectives": "Acondicionar y dar volumen a la musculatura extensora del tren inferior (cuádriceps) de forma aislada, sumar activación excéntrica controlada de isquiosurales, incrementar la potencia local de las pantorrillas para dar soporte a la marcha, y sumar un estímulo unilateral de estabilidad con rango de cadera acotado.",
+      "tips": "En la prensa a 180°, empujar distribuyendo el peso en todo el metatarso; no levantar los talones de la plataforma. En los hamstring walkouts, mantener el torso estable y avanzar con pasos cortos y controlados, sin perder la alineación de cadera. En el split squat con apoyo de mano, frenar el descenso antes de los 90° de flexión de cadera y usar el apoyo para no perder el equilibrio.",
+      "strategies": "El gran volumen de isquiosurales y pantorrillas se agrupa en triserie al final junto con un estímulo unilateral de cadera controlado (≤90° de flexión, con apoyo de mano) para optimizar la resistencia periférica y el retorno venoso sin sobrecargar la cadera.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera y los hombros.<br><br><b>Semana 1:</b> Técnica de la prensa a RPE 6.5 con asiento/respaldo verificado. Triserie de isquiosurales, pantorrillas y split squat a volumen moderado, priorizando el control del rango de cadera.<br><b>Semana 2:</b> Incremento marginal de carga en la prensa y en las extensiones unilaterales, siempre sin molestia de cadera.<br><b>Semana 3:</b> Pico de carga controlado en cuádriceps, isquiosurales, pantorrillas y split squat, sin buscar el fallo técnico ni superar los 90° de flexión de cadera.<br><b>Semana 4 (Descarga):</b> Triserie a 2 vueltas, RPE general a 5, foco en marcha y equilibrio."
     }
   },
   {
@@ -572,7 +586,7 @@ const workouts = [
     "discipline": "Tracción Vertical Adaptada",
     "level": "Día 3",
     "levelSlug": "Dia_3",
-    "desc": "Torso dominante: tracción vertical con torso inclinado hacia atrás para proteger el manguito rotador, más densidad de bíceps en planos estables.",
+    "desc": "Torso dominante: tracción vertical con torso inclinado hacia atrás para proteger el manguito rotador, más densidad de bíceps en planos estables y anti-rotación de core con banda.",
     "warmup": [
       {
         "name": "Elíptico – zancada fluida progresiva",
@@ -589,16 +603,16 @@ const workouts = [
         "sub": "La tracción vertical se realiza inclinando levemente el torso hacia atrás, permitiendo que la barra baje al pecho de forma segura sin forzar la movilidad del hombro sobre la cabeza. <a class='video-link' href='javascript:void(0)' data-yt='W2x6zP9k7SM'>▶ Ver técnica en video</a>"
       },
       {
-        "name": "Bloque 2: Superserie de Tracción Cerrada y Estabilidad",
+        "name": "Bloque 2: Superserie de Tracción Cerrada y Bíceps",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60s post-ronda",
-        "sub": "<span class='sub-block-title'>A1</span> Close Grip Lat Pulldown (Jalón agarre cerrado neutro) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='jXRxMJhOCc0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Plancha abdominal inclinada (antebrazos apoyados en banco alto) = 30 segundos con bloqueo del transverso. <a class='video-link' href='javascript:void(0)' data-yt='xe2MXatLTUw'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>A1</span> Close Grip Lat Pulldown (Jalón agarre cerrado neutro) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='jXRxMJhOCc0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>A2</span> Incline Dumbbell Curl (Curl de bíceps inclinado en banco 45°) = 12 repeticiones controlando la fase excéntrica. <a class='video-link' href='javascript:void(0)' data-yt='uCUaRFlA9vE'>▶ Ver técnica en video</a>"
       },
       {
         "name": "Bloque 3: Triserie Postural y Flexores de Codo",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Pull-over en polea alta con cuerda = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MeczZ6iUYPo'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Dumbbell Bicep Curl (Curl de bíceps con mancuernas de pie) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MKWBV29S6c0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> AbMat Sit-up (sentada controlada en banco o silla inclinada) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='_HDZODOx7Zw'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>B1</span> Pull-over en polea alta con cuerda = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MeczZ6iUYPo'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Dumbbell Bicep Curl (Curl de bíceps con mancuernas de pie) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='MKWBV29S6c0'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Banded Split Stance Pallof Press (Pallof Press con banda en postura dividida) = 20 segundos por lado. <a class='video-link' href='javascript:void(0)' data-yt='q_SgHjY4fck'>▶ Ver técnica en video</a>"
       }
     ],
     "metcon": [
@@ -612,7 +626,7 @@ const workouts = [
     "technicalAnalysis": {
       "objectives": "Maximizar el volumen efectivo de tracciones para los dorsales y la espalda alta e incrementar la fuerza de los bíceps en planos estables.",
       "tips": "Retraer los omóplatos antes de traccionar con los brazos. Mantener los codos pegados al cuerpo en el curl de bíceps.",
-      "strategies": "Ajustar el ángulo del jalón vertical a una posición semi-inclinada atrás elimina por completo la fricción del manguito rotador, permitiendo meter volumen sin dolor.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica del Jalón prono a RPE 7, con el torso inclinado hacia atrás verificado. Triserie postural a volumen moderado.<br><b>Semana 2:</b> Incremento marginal de carga en el Jalón y en el Close Grip Lat Pulldown, siempre sin molestia de hombro.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de tracción, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en retracción escapular."
+      "strategies": "Ajustar el ángulo del jalón vertical a una posición semi-inclinada atrás elimina por completo la fricción del manguito rotador, permitiendo meter volumen sin dolor.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera y los hombros.<br><br><b>Semana 1:</b> Técnica del Jalón prono a RPE 7, con el torso inclinado hacia atrás verificado. Triserie postural a volumen moderado.<br><b>Semana 2:</b> Incremento marginal de carga en el Jalón y en el Close Grip Lat Pulldown, siempre sin molestia de hombro.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de tracción, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en retracción escapular."
     }
   },
   {
@@ -622,7 +636,7 @@ const workouts = [
     "discipline": "Hombro Seguro & Brazos",
     "level": "Día 4",
     "levelSlug": "Dia_4",
-    "desc": "Mixto de brazos: deltoides trabajado en plano inclinado y polea baja (sin vuelos libres ni press vertical), con volumen completo de bíceps y tríceps.",
+    "desc": "Mixto de brazos y piernas: deltoides trabajado en plano inclinado y vuelo lateral en banco (sin abducción pura ni press vertical), volumen completo de bíceps y tríceps, y un finisher metabólico de piernas en rango de cadera controlado.",
     "warmup": [
       {
         "name": "Cinta de caminar plana",
@@ -648,21 +662,21 @@ const workouts = [
         "name": "Bloque 3: Triserie Estética de Hombro Lateral y Flexores",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Vuelos laterales en polea baja (cuerpo sutilmente inclinado de lado) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='V98wql8IfVA'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Curl de bíceps martillo (Hammer Curl) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='fM0TQLoesLs'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Cable Pallof Press (sostén estático de pie) = 20 segundos por lado. <a class='video-link' href='javascript:void(0)' data-yt='-0N2xTi69t8'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>B1</span> Incline Lateral Raise (Vuelo lateral con mancuernas inclinado en banco) = 12 a 15 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='AhBIRzyMyw8'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Curl de bíceps martillo (Hammer Curl) = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='fM0TQLoesLs'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Cable Pallof Press (sostén estático de pie) = 20 segundos por lado. <a class='video-link' href='javascript:void(0)' data-yt='-0N2xTi69t8'>▶ Ver técnica en video</a>"
       }
     ],
     "metcon": [
       {
-        "name": "Bloque 4: Finisher de Flexores en Polea",
-        "reps": "3 series efectivas",
-        "detail": "<b>Descanso</b><br>45 segundos",
-        "sub": "<span class='sub-block-title'>C1</span> Cable Bicep Curl (Curl en polea baja con barra recta) = 12 a 15 repeticiones buscando tensión continua. <a class='video-link' href='javascript:void(0)' data-yt='CrbTqNOlFgE'>▶ Ver técnica en video</a>"
+        "name": "Bloque 4: Finisher Metabólico de Piernas",
+        "reps": "Escalera 30-20-10",
+        "detail": "<b>Descanso</b><br>Activo (bicicleta)",
+        "sub": "<span class='sub-block-title'>C1</span> Air Squats a rango parcial (sin pasar de 90° de flexión de cadera) = 30, 20 y 10 repeticiones, alternando con bicicleta fija entre series (5, luego 4, luego 3 minutos a ritmo suave).<br><span class='sub-section'><span class='sub-title-tag coaching'>💡 TIP:</span>Bajar solo hasta que el muslo llegue a los 90° de flexión de cadera, sin buscar mayor profundidad; el pedaleo suave entre series mantiene el pulso activo sin sumar impacto ni carga extra sobre la cadera.</span>"
       }
     ],
     "technicalAnalysis": {
-      "objectives": "Desarrollar los hombros y brazos mediante vectores seguros (plano inclinado neutro y tracciones traseras), evitando la abducción pura y la elevación sobre la cabeza.",
-      "tips": "En los vuelos en polea, mantener la mano por debajo de la línea del hombro en el punto más alto. En el press francés, fijar firmemente los codos.",
-      "strategies": "Al quitar los vuelos con mancuernas tradicionales libres y el press vertical, el hombro se estimula de forma indirecta a través del plano inclinado y la polea baja sin pellizcar el tendón.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica del press inclinado a RPE 6 y de la triserie de hombro lateral en polea, sin ningún dolor articular.<br><b>Semana 2:</b> Incremento marginal de carga en el press inclinado y en el face pull, siempre sin molestia de hombro.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de hombro y brazos, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en apertura del espacio subacromial."
+      "objectives": "Desarrollar los hombros y brazos mediante vectores seguros (plano inclinado neutro y tracciones traseras), evitando la abducción pura y la elevación sobre la cabeza, y sumar un estímulo metabólico de piernas de alto volumen con la cadera en rango controlado.",
+      "tips": "En el vuelo lateral inclinado, apoyar bien el torso en el banco y elevar la mancuerna dentro del plano de la escápula (levemente hacia adelante), sin pasar la línea del hombro en el punto más alto. En el press francés, fijar firmemente los codos. En los air squats, frenar el descenso apenas el muslo llega a los 90°, sin buscar mayor profundidad.",
+      "strategies": "Se evita el vuelo lateral tradicional de pie (abducción pura) y el press vertical; el apoyo del torso en el banco inclinado reorienta el vuelo lateral hacia el plano de la escápula, y el press se resuelve en plano inclinado, estimulando el hombro sin pellizcar el tendón. El finisher metabólico cierra el día con volumen de piernas en rango parcial y descanso activo en bicicleta, sin impacto ni sobrecarga de cadera.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera y los hombros.<br><br><b>Semana 1:</b> Técnica del press inclinado a RPE 6 y de la triserie de hombro lateral inclinado, sin ningún dolor articular. Finisher a ritmo cómodo, priorizando la técnica del rango parcial.<br><b>Semana 2:</b> Incremento marginal de carga en el press inclinado y en el face pull, siempre sin molestia de hombro.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de hombro y brazos, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, y el finisher se acorta a una escalera 20-10 con más descanso, foco en apertura del espacio subacromial y en la cadera."
     }
   },
   {
@@ -672,13 +686,13 @@ const workouts = [
     "discipline": "Tracción Horizontal & Bisagra",
     "level": "Día 5",
     "levelSlug": "Dia_5",
-    "desc": "Piernas dominante / bisagra: tracción horizontal con soporte torácico, peso muerto rumano ligero y finisher de glúteo medio para estabilizar la cadera operada.",
+    "desc": "Piernas dominante / bisagra: tracción horizontal con soporte torácico, peso muerto rumano ligero y superserie de glúteo medio para estabilizar la cadera.",
     "warmup": [
       {
         "name": "Bicicleta fija – asiento alto",
         "reps": "5 minutos",
         "detail": "<b>Objetivo:</b> Flexión de cadera ≤ 90°",
-        "sub": "Asiento alto para cuidar la flexión de la cadera operada."
+        "sub": "Asiento alto para cuidar la flexión de cadera."
       }
     ],
     "main": [
@@ -698,21 +712,21 @@ const workouts = [
         "name": "Bloque 3: Triserie Postural de Espalda Alta y Gemelos",
         "reps": "3 a 4 vueltas",
         "detail": "<b>Descanso</b><br>60 segundos",
-        "sub": "<span class='sub-block-title'>B1</span> Remo con barra en T = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='edZUQEV8DBQ'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Single-leg Cable Standing Calf Raise (Gemelos unilaterales en polea de pie) = 12 repeticiones por pierna. <a class='video-link' href='javascript:void(0)' data-yt='epF7bNRSa-U'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Lying Leg Curl (Curl de isquios en máquina camilla boca abajo) = 12 repeticiones. <a class='video-link' href='javascript:void(0)' data-yt='lGNeJsdqJwg'>▶ Ver técnica en video</a>"
+        "sub": "<span class='sub-block-title'>B1</span> Remo con barra en T = 12 repeticiones estrictas. <a class='video-link' href='javascript:void(0)' data-yt='edZUQEV8DBQ'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B2</span> Single-leg Cable Standing Calf Raise (Gemelos unilaterales en polea de pie) = 12 repeticiones por pierna. <a class='video-link' href='javascript:void(0)' data-yt='epF7bNRSa-U'>▶ Ver técnica en video</a><br><span class='sub-block-title'>B3</span> Seated Banded Hamstring Curl (Curl de isquios sentada con banda) = 15 repeticiones controladas. <a class='video-link' href='javascript:void(0)' data-yt='Os5z898vpnQ'>▶ Ver técnica en video</a>"
       }
     ],
     "metcon": [
       {
-        "name": "Bloque 4: Finisher de Estabilidad Lateral de Cadera",
-        "reps": "3 series efectivas",
-        "detail": "<b>Descanso</b><br>45 segundos",
-        "sub": "<span class='sub-block-title'>C1</span> Banded Lateral Walk (Caminata lateral con banda elástica en los pies) = 15 pasos cortos de lado a lado. <a class='video-link' href='javascript:void(0)' data-yt='3tHXjTlKX0g'>▶ Ver técnica en video</a>"
+        "name": "Bloque 4: Superserie de Estabilidad Lateral de Cadera",
+        "reps": "2 a 3 vueltas",
+        "detail": "<b>Descanso</b><br>45s post-ronda",
+        "sub": "<span class='sub-block-title'>C1</span> Banded Lateral Walk (Caminata lateral con banda elástica en los pies) = 15 pasos cortos de lado a lado. <a class='video-link' href='javascript:void(0)' data-yt='3tHXjTlKX0g'>▶ Ver técnica en video</a><br><span class='sub-block-title'>C2</span> Legs Abduction Machine (Abducción de cadera sentada en máquina) = 15 repeticiones controladas. <a class='video-link' href='javascript:void(0)' data-yt='oFLGX54QgpQ'>▶ Ver técnica en video</a>"
       }
     ],
     "technicalAnalysis": {
       "objectives": "Equilibrar las fuerzas de tracción horizontal superiores y consolidar el control y la fuerza de la cadena posterior baja (isquios/glúteos) de forma segura.",
       "tips": "En el peso muerto rumano, empujar la pelvis hacia atrás manteniendo la barra pegada a las piernas durante todo el recorrido; no redondear la espalda baja.",
-      "strategies": "El uso de la caminata con banda lateral (C1) de pie activa el glúteo medio, lo que ayuda a estabilizar la articulación coxofemoral operada de forma progresiva y mitigar mecánicamente la leve renguera de su andar diario.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera operada y los hombros.<br><br><b>Semana 1:</b> Técnica del remo articulado y del RDL ligero a RPE 7, consolidando la bisagra de cadera suave.<br><b>Semana 2:</b> Incremento marginal de carga en el remo unilateral y el RDL, siempre sin molestia de cadera ni espalda baja.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de tracción y cadena posterior, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en el finisher de glúteo medio para la marcha."
+      "strategies": "La superserie final combina la caminata con banda lateral (C1) de pie con la abducción en máquina sentada (C2), sumando dos vectores de trabajo para el glúteo medio -uno funcional de pie y otro aislado con apoyo total- que ayudan a estabilizar la articulación coxofemoral de forma progresiva y mitigar mecánicamente la leve renguera de su andar diario.<br><br><b>Mesociclo (4 semanas):</b> progresión conservadora y autorregulada por RPE, sin buscar nunca el fallo técnico, con descarga activa en la semana 4 para cuidar la cadera y los hombros.<br><br><b>Semana 1:</b> Técnica del remo articulado y del RDL ligero a RPE 7, consolidando la bisagra de cadera suave.<br><b>Semana 2:</b> Incremento marginal de carga en el remo unilateral y el RDL, siempre sin molestia de cadera ni espalda baja.<br><b>Semana 3:</b> Pico de carga controlado en los bloques de tracción y cadena posterior, sin buscar el fallo técnico.<br><b>Semana 4 (Descarga):</b> Superseries y triserie bajan a 2 vueltas, RPE general a 5, foco en la superserie de glúteo medio para la marcha."
     }
   }
 ];
@@ -869,12 +883,81 @@ function renderGrid(data) {
     grid.appendChild(card);
   });
 }
+function renderExerciseSub(subHtml) {
+  if (!subHtml) return '';
+  const container = document.createElement('div');
+  container.innerHTML = subHtml;
+
+  // Separar: explicaciones/tips (sub-section) por un lado, líneas de ejercicio por otro
+  const explanationParts = [];
+  const lineGroups = [];
+  let currentLine = [];
+
+  Array.from(container.childNodes).forEach(node => {
+    if (node.nodeType === 1 && node.tagName === 'BR') {
+      if (currentLine.length) { lineGroups.push(currentLine); currentLine = []; }
+    } else if (node.nodeType === 1 && node.classList && node.classList.contains('sub-section')) {
+      explanationParts.push(node.innerHTML);
+    } else {
+      currentLine.push(node);
+    }
+  });
+  if (currentLine.length) lineGroups.push(currentLine);
+
+  const hasTags = lineGroups.some(line => line.some(n => n.nodeType === 1 && n.classList && n.classList.contains('sub-block-title')));
+
+  let out = '';
+
+  if (hasTags && lineGroups.length) {
+    out += '<div class="combo-exercise-list">';
+    lineGroups.forEach(lineNodes => {
+      const wrap = document.createElement('div');
+      lineNodes.forEach(n => wrap.appendChild(n.cloneNode(true)));
+
+      let tag = '';
+      const tagEl = wrap.querySelector('.sub-block-title');
+      if (tagEl) { tag = tagEl.textContent; tagEl.remove(); }
+
+      let linkHtml = '';
+      const linkEl = wrap.querySelector('.video-link');
+      if (linkEl) { linkHtml = linkEl.outerHTML; linkEl.remove(); }
+
+      let text = wrap.innerHTML.replace(/^\s+/, '').trim();
+      let name = text, reps = '';
+      const eqIdx = text.indexOf(' = ');
+      if (eqIdx > -1) {
+        name = text.slice(0, eqIdx).trim();
+        reps = text.slice(eqIdx + 3).trim().replace(/\.\s*$/, '');
+      }
+
+      out += `<div class="combo-exercise-item">` +
+        (tag ? `<span class="combo-tag">${tag}</span>` : '') +
+        `<div class="combo-exercise-info"><span class="combo-exercise-name">${name}</span>` +
+        (reps ? `<span class="combo-exercise-reps">${reps}</span>` : '') +
+        `</div>${linkHtml}</div>`;
+    });
+    out += '</div>';
+  } else if (lineGroups.length) {
+    const wrap = document.createElement('div');
+    lineGroups.forEach((lineNodes, i) => {
+      lineNodes.forEach(n => wrap.appendChild(n.cloneNode(true)));
+      if (i < lineGroups.length - 1) wrap.appendChild(document.createElement('br'));
+    });
+    out += `<div class="exercise-plain-sub">${wrap.innerHTML}</div>`;
+  }
+
+  if (explanationParts.length) {
+    explanationParts.forEach(p => { out += `<div class="explain-box">${p}</div>`; });
+  }
+
+  return out;
+}
 function getExerciseRow(ex, idx) {
   return `
     <div class="exercise-row">
       <div class="exercise-num">${idx + 1}</div>
       <div class="exercise-title-container">
-        <div class="exercise-name">${ex.name}<sub>${ex.sub}</sub></div>
+        <div class="exercise-name">${ex.name}<div class="exercise-explain-wrap">${renderExerciseSub(ex.sub)}</div></div>
       </div>
       <div class="exercise-detail"><b>${ex.reps}</b>${ex.detail ? ex.detail : ''}</div>
     </div>
